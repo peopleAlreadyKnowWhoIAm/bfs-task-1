@@ -10,5 +10,5 @@ target_include_directories(mgraph PUBLIC include)
 
 enable_testing()
 
-add_executable(mgraph_test tests/test.cpp)
+add_executable(mgraph_test main.cpp)
 target_link_libraries(mgraph_test mgraph)
