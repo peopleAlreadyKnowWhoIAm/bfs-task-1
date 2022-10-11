@@ -78,4 +78,6 @@ class mGraph {
    * @return string of adjecent list
    */
   string to_string() const;
+
+  void set_root(const int a);
 };
