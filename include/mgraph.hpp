@@ -19,14 +19,19 @@ struct Edge {
   int weight = 0;
   bool unordered = true;
 };
-
-/// @brief My implementation of graph
-class mGraph {
   struct Target {
     Target(int to, int weight = 0);
     int to;
     int weight = 0;
   };
+
+  struct From {
+    From(int from, int weight = 0);
+    int from;
+    int weight = 0;
+  };
+/// @brief My implementation of graph
+class mGraph {
 
   int root_;
 
@@ -48,15 +53,16 @@ class mGraph {
    * @brief Broad First Search. Never go graph <=> graph cycle
    * 
    * @param fn function callback
-   * fn @param from vertex index
    * fn @param current vertex index
    * fn @param visited map<visited index, from vertex>
    * @param only_not_visited flag when call `fn`. If set call after skipping visited,
    *                         else before(could be used for search cycles)
    */
   void bfs(
-      function<bool(const int from, const int current, const unordered_map<int, int>& visited)> fn,
+      function<bool(const int current, const unordered_map<int, From>& visited)> fn,
       bool only_not_visited = true);
+
+  void dijkstra(function<bool(const int current, const unordered_map<int, From>& visited)> fn, bool only_after_all_visited = false);
 
   /**
    * @brief Check whether is cycles which include more than 2 nodes
@@ -72,4 +78,6 @@ class mGraph {
    * @return string of adjecent list
    */
   string to_string() const;
+
+  void set_root(const int a);
 };
